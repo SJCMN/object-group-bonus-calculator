@@ -10,7 +10,7 @@ function buttonClick(){
     $('#employeeList').append(
         `<li><h3>${employee.name}</h3>
           <div class="employeeData">
-             <h4>Bonus Percentage: ${employee.bonusPercentage}</h4>
+             <h4>Bonus Percentage: ${employee.bonusPercentage*100}%</h4>
              <h4>Total Bonus: $${employee.totalBonus}</h4>
              <h4>Total Compensation: $${employee.totalCompensation}</h4>
           </div>    
