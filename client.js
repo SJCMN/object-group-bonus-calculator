@@ -81,7 +81,7 @@ function salaryBonus ( salary ) {
     return 0;
   }
 } // end currentSalary
- console.log(`input 65001, output ${currentSalary('65001')}`);
+ console.log(`input 65001, output ${salaryBonus('65001')}`);
  
 
 //a function that checks bonus percent and reduces to 13% if > 13%
@@ -103,21 +103,33 @@ console.log(`Input: ${testVal}, output: ${clampBonus(testVal)}`);
 // accepts employee object
 // returns employeeBonus object
 
-function bonusCalculator ( employee ) {
+function bonusCalculator ( employees ) {
+  let bonusArray = [];
 
-  let ratingBonus = ratingBonus(employee.reviewRating);
-  let seniorityBonus = seniorityBonus(employee.employeeNumber);
-  let salaryBonus = salaryBonus(employee.annualSalary);
-  let bonus = ratingBonus + seniorityBonus + salaryBonus;
-  let finalBonus = 1 + clampBonus(bonus);
-  let employeeBonus = { 
-    name: employee.name,
-    bonusPercentage: employeeBonus,
-    totalCompensation: employee.annualSalary * finalBonus,
-    totalBonus: employee.annualSalary * finalBonus - employee.annualSalary
-  };
-  return employeeBonus
+  for(let employee of employees){
+    let ratingBonusCalc = ratingBonus(employee.reviewRating);
+    let seniorityBonusCalc = seniorityBonus(employee.employeeNumber);
+    let salaryBonusCalc = salaryBonus(employee.annualSalary);
+    let bonus = ratingBonusCalc + seniorityBonusCalc + salaryBonusCalc;
+    let finalBonus = clampBonus(bonus);
+    //console.log(employee.annualSalary * (finalBonus + 1));
+    //console.log(employee.annualSalary * finalBonus + employee.annualSalary);
+    let totalBonusCalc = Math.round(employee.annualSalary * finalBonus)
+    
+    let employeeBonus = { 
+      name: employee.name,
+      bonusPercentage: finalBonus,
+      totalCompensation: totalBonusCalc + Number(employee.annualSalary),
+      totalBonus: totalBonusCalc
+    };
+    bonusArray.push(employeeBonus);
+  }
+
+  return bonusArray;
 }
+
+console.log(bonusCalculator( employees ));
+
 
 
 console.log( employees );
