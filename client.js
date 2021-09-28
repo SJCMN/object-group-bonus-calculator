@@ -60,13 +60,42 @@ console.log(ratingBonus(5));
 
 
 //a function that takes in an employee number and returns an additional bonus if employee number has 4 digits
-
-
+function seniorityBonus(employeeNumber){
+  // checks if employee is a senior employee (id has four digits)
+  if(employeeNumber.length === 4){
+    return 0.05;
+  }else{
+    return 0;
+  }
+}
+console.log(`input '6243', output:`, seniorityBonus('62430'));
 
 //a function that takes in an annual income and reduces bonus percentage to 1% if annual income > $65,000
 
-
+function currentSalary ( salary ) {
+  console.log(Number(salary));
+  
+  if ( Number(salary) > 65000 ){
+    return -0.01;
+  } else {
+    return 0;
+  }
+} // end currentSalary
+ console.log(`input 65001, output ${currentSalary('65001')}`);
+ 
 
 //a function that checks bonus percent and reduces to 13% if > 13%
 
+function clampBonus(bonus){
+  if(bonus > .13){
+    bonus = .13;
+  }else if(bonus < 0){
+    bonus = 0;
+  }
+
+  return bonus;
+}
+
+let testVal = -.14;
+console.log(`Input: ${testVal}, output: ${clampBonus(testVal)}`);
 console.log( employees );
