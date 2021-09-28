@@ -1,3 +1,23 @@
+$(document).ready(readyNow);
+
+function readyNow() {
+  $('#goButton').on('click', buttonClick);
+}
+
+function buttonClick(){
+  console.log('button clicked');
+  for(let employee of bonusCalculator(employees)) {
+    $('#employeeList').append(
+        `<li><h3>${employee.name}</h3>
+          <div class="employeeData">
+             <h4>Bonus Percentage: ${employee.bonusPercentage}</h4>
+             <h4>Total Bonus: $${employee.totalBonus}</h4>
+             <h4>Total Compensation: $${employee.totalCompensation}</h4>
+          </div>    
+        </li>`);
+  }
+}
+
 const employees = [
   {
     name: 'Atticus',
