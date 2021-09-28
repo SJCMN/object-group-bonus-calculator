@@ -72,7 +72,7 @@ console.log(`input '6243', output:`, seniorityBonus('62430'));
 
 //a function that takes in an annual income and reduces bonus percentage to 1% if annual income > $65,000
 
-function currentSalary ( salary ) {
+function salaryBonus ( salary ) {
   console.log(Number(salary));
   
   if ( Number(salary) > 65000 ){
@@ -98,4 +98,28 @@ function clampBonus(bonus){
 
 let testVal = -.14;
 console.log(`Input: ${testVal}, output: ${clampBonus(testVal)}`);
+
+// bonusCalculator 
+// accepts employee object
+// returns employeeBonus object
+
+function bonusCalculator ( employee ) {
+
+  let ratingBonus = ratingBonus(employee.reviewRating);
+  let seniorityBonus = seniorityBonus(employee.employeeNumber);
+  let salaryBonus = salaryBonus(employee.annualSalary);
+  let bonus = ratingBonus + seniorityBonus + salaryBonus;
+  let finalBonus = 1 + clampBonus(bonus);
+  let employeeBonus = { 
+    name: employee.name,
+    bonusPercentage: employeeBonus,
+    totalCompensation: employee.annualSalary * finalBonus,
+    totalBonus: employee.annualSalary * finalBonus - employee.annualSalary
+  };
+  return employeeBonus
+}
+
+
 console.log( employees );
+
+
