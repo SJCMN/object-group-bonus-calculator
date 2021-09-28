@@ -127,15 +127,21 @@ function bonusCalculator ( employees ) {
   let bonusArray = [];
 
   for(let employee of employees){
+    //calculate initial bonus based on rating
     let ratingBonusCalc = ratingBonus(employee.reviewRating);
+    //calculate seniority adjustment based on employee number
     let seniorityBonusCalc = seniorityBonus(employee.employeeNumber);
+    //caculate salary adjustment based on annual salary
     let salaryBonusCalc = salaryBonus(employee.annualSalary);
+    //calculate bonus based on initial bonus and adjustments
     let bonus = ratingBonusCalc + seniorityBonusCalc + salaryBonusCalc;
+    //make sure bonus is not <0 and not >13%
     let finalBonus = clampBonus(bonus);
     //console.log(employee.annualSalary * (finalBonus + 1));
     //console.log(employee.annualSalary * finalBonus + employee.annualSalary);
+    //Round final bonus
     let totalBonusCalc = Math.round(employee.annualSalary * finalBonus)
-    
+    //create object to push to resluts array
     let employeeBonus = { 
       name: employee.name,
       bonusPercentage: finalBonus,
