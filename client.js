@@ -8,12 +8,13 @@ function buttonClick(){
   console.log('button clicked');
   for(let employee of bonusCalculator(employees)) {
     $('#employeeList').append(
-        `<li><h3>${employee.name}</h3>
-          <div class="employeeData">
-             <h4>Bonus Percentage: ${employee.bonusPercentage*100}%</h4>
-             <h4>Total Bonus: $${employee.totalBonus}</h4>
-             <h4>Total Compensation: $${employee.totalCompensation}</h4>
-          </div>    
+        `<li>
+          <h3>${employee.name}</h3>
+            <div class="employeeData">
+              <h4>Bonus Percentage: ${employee.bonusPercentage*100}%</h4>
+              <h4>Total Bonus: $${employee.totalBonus}</h4>
+              <h4>Total Compensation: $${employee.totalCompensation}</h4>
+            </div>    
         </li>`);
   }
 }
@@ -75,6 +76,8 @@ function ratingBonus(rating) {
     return 0.1;
   }
 }//end ratingBonus
+console.log('ratingBonus');
+
 console.log(ratingBonus(5));
 
 
@@ -88,6 +91,8 @@ function seniorityBonus(employeeNumber){
     return 0;
   }
 }
+console.log('seniorityBonus');
+
 console.log(`input '6243', output:`, seniorityBonus('62430'));
 
 //a function that takes in an annual income and reduces bonus percentage to 1% if annual income > $65,000
@@ -101,7 +106,9 @@ function salaryBonus ( salary ) {
     return 0;
   }
 } // end currentSalary
- console.log(`input 65001, output ${salaryBonus('65001')}`);
+console.log('salaryBonus');
+
+console.log(`input 65001, output ${salaryBonus('65001')}`);
  
 
 //a function that checks bonus percent and reduces to 13% if > 13%
@@ -112,11 +119,12 @@ function clampBonus(bonus){
   }else if(bonus < 0){
     bonus = 0;
   }
-
   return bonus;
 }
 
 let testVal = -.14;
+console.log('clampBonus');
+
 console.log(`Input: ${testVal}, output: ${clampBonus(testVal)}`);
 
 // bonusCalculator 
@@ -131,17 +139,19 @@ function bonusCalculator ( employees ) {
     let ratingBonusCalc = ratingBonus(employee.reviewRating);
     //calculate seniority adjustment based on employee number
     let seniorityBonusCalc = seniorityBonus(employee.employeeNumber);
-    //caculate salary adjustment based on annual salary
+    //calculate salary adjustment based on annual salary
     let salaryBonusCalc = salaryBonus(employee.annualSalary);
     //calculate bonus based on initial bonus and adjustments
     let bonus = ratingBonusCalc + seniorityBonusCalc + salaryBonusCalc;
     //make sure bonus is not <0 and not >13%
     let finalBonus = clampBonus(bonus);
+    console.log('final bonus:', finalBonus);
+    
     //console.log(employee.annualSalary * (finalBonus + 1));
     //console.log(employee.annualSalary * finalBonus + employee.annualSalary);
     //Round final bonus
     let totalBonusCalc = Math.round(employee.annualSalary * finalBonus)
-    //create object to push to resluts array
+    //create object to push to results array
     let employeeBonus = { 
       name: employee.name,
       bonusPercentage: finalBonus,
@@ -153,6 +163,8 @@ function bonusCalculator ( employees ) {
 
   return bonusArray;
 }
+
+console.log('bonusCalculator');
 
 console.log(bonusCalculator( employees ));
 
